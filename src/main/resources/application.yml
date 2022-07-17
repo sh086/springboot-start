@@ -1,0 +1,14 @@
+# 路径配置
+server:
+  servlet:
+    context-path: /api/
+
+# Spring
+spring:
+  profiles:
+    active: dev
+
+  #  这个mvc的配置是springboot 2.6.x和2.7.x不支持swagger3的折衷配置，后面考虑升级Springboot版本或降级版本
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
