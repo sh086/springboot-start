@@ -1,6 +1,7 @@
 package com.shooter.springboot.common.config;
 
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpMethod;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.*;
@@ -9,8 +10,8 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import io.swagger.v3.oas.annotations.Operation;
 import java.util.*;
+import io.swagger.v3.oas.annotations.Operation;
 
 @EnableOpenApi
 @SpringBootConfiguration
@@ -38,7 +39,12 @@ public class SwaggerConfig {
                 // 授权信息设置，必要的header token等认证信息
                 .securitySchemes(securitySchemes())
                 // 授权信息全局应用
-                .securityContexts(securityContexts());
+                .securityContexts(securityContexts())
+                // 通用响应信息
+                .globalResponses(HttpMethod.GET, getGlobalResponseMessage())
+                .globalResponses(HttpMethod.POST, getGlobalResponseMessage())
+                .globalResponses(HttpMethod.DELETE, getGlobalResponseMessage())
+                .globalResponses(HttpMethod.PUT, getGlobalResponseMessage());
     }
 
     /**
@@ -75,5 +81,16 @@ public class SwaggerConfig {
                                         new AuthorizationScope[]{
                                                 new AuthorizationScope("global", "请求Token")})))
                         .build());
+    }
+
+    /**
+     * 生成通用响应信息
+     * */
+    private List<Response> getGlobalResponseMessage() {
+        List<Response> responseList = new ArrayList<>();
+        responseList.add(new ResponseBuilder().code("404").description("找不到资源").build());
+        responseList.add(new ResponseBuilder().code("403").description("请求拒绝").build());
+        responseList.add(new ResponseBuilder().code("401").description("权限拒绝").build());
+        return responseList;
     }
 }

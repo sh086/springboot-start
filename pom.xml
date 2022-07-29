@@ -60,7 +60,7 @@
 		</dependency>
 		<!--freemarker End-->
 
-		<!--swagger start-->
+		<!--doc start-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
@@ -71,7 +71,12 @@
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 			<version>3.0.2</version>
 		</dependency>
-		<!--swagger end-->
+		<dependency>
+			<groupId>cn.smallbun.screw</groupId>
+			<artifactId>screw-core</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<!--doc end-->
 
 		<!--SpringBoot Test Start-->
 		<dependency>
@@ -86,11 +91,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>cn.smallbun.screw</groupId>
-			<artifactId>screw-core</artifactId>
-			<version>1.0.5</version>
 		</dependency>
         <!--Common End-->
 	</dependencies>
